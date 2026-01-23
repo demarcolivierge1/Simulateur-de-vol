@@ -92,3 +92,76 @@ En Indirect mode, on accède aux données via les registres.
 En Memory-mapped, on lit et écrit directement par adresse.  
 
 Toutes les transactions sont gérées automatiquement par l’OctoSPI.
+
+
+## Écriture et lecture de données dans la flash MX66
+
+La MX66 est une mémoire flash NOR, ce qui impose certaines contraintes :
+
+Une zone mémoire doit être effacée avant d’être écrite
+
+L’écriture se fait par pages (typiquement 256 octets)
+
+L’effacement se fait par secteurs (4 Ko, 64 Ko, etc.)
+
+## Écriture de données dans la flash
+
+L’écriture se fait généralement en mode Indirect et suit les étapes suivantes :
+
+Activation de l’écriture (Write Enable)
+Une commande est envoyée pour autoriser les opérations d’écriture ou d’effacement.
+
+Effacement du secteur cible
+Un secteur contenant l’adresse à écrire est effacé.
+
+Attente de la fin de l’effacement
+Le bit BUSY du registre d’état est surveillé, souvent via le mode Automatic status-polling.
+
+Programmation de la page (Page Program)
+Les données sont envoyées à la mémoire à l’adresse choisie.
+
+Attente de la fin de l’écriture
+La mémoire indique qu’elle est de nouveau disponible.
+
+Les données à écrire sont stockées dans un tableau en RAM, puis envoyées vers la flash.
+
+## Stockage des données dans un tableau
+
+Avant l’écriture, les données sont préparées dans un tableau en mémoire interne :
+
+uint8_t txBuffer[256] = { 0x10, 0x20, 0x30, 0x40 };
+
+
+Ce tableau est ensuite transmis à la mémoire MX66 lors de la phase Data de la commande Page Program.
+
+## Lecture des données
+Lecture en mode Indirect
+
+Les données lues depuis la flash sont stockées dans un tableau RAM :
+
+uint8_t rxBuffer[256];
+
+
+Après la lecture, les données sont accessibles directement dans ce tableau.
+
+## Lecture en mode Memory-mapped
+
+En mode Memory-mapped, la mémoire flash est vue comme une zone mémoire classique.
+Il est possible de lire les données directement par adresse ou de les copier dans un tableau :
+
+memcpy(rxBuffer, (uint8_t*)OSPI_FLASH_ADDRESS, 256);
+
+
+Aucune commande SPI n’est nécessaire : l’OctoSPI gère automatiquement les accès.
+
+## Organisation des données dans la flash
+
+Pour une utilisation fiable, la mémoire est généralement organisée en zones :
+
+paramètres de configuration
+
+données applicatives
+
+stockage temporaire ou logs
+
+Cette organisation permet de limiter l’usure de la flash et de structurer les accès mémoire.
