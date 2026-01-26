@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projet Simulateur de vol.md",
+                "file": "FreeRTOS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Projet Simulateur de vol"
+              "title": "FreeRTOS"
             }
           }
         ]
@@ -185,7 +185,10 @@
   },
   "active": "f69f316b98e05468",
   "lastOpenFiles": [
+    "Pasted image 20260123115040.png",
     "Objet graphique SVG.md",
+    "FreeRTOS.md",
+    "FreeRTOS",
     "Projet Simulateur de vol.md"
   ]
 }
