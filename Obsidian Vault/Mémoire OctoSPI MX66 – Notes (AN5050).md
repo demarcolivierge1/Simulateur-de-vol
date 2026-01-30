@@ -69,7 +69,7 @@ En mode Memory-mapped, on lit et écrit directement par adresse.
 
 Toutes les transactions sont alors gérées automatiquement par l’OctoSPI.
 
-Écriture et lecture de données dans la flash MX66
+## Écriture et lecture de données dans la flash MX66
 
 La MX66 est une mémoire flash NOR, ce qui impose certaines contraintes :
 
@@ -98,7 +98,7 @@ uint8_t txBuffer[256] = { 0x10, 0x20, 0x30, 0x40 };
 
 Ce tableau est ensuite transmis à la mémoire MX66 lors de la phase Data de la commande Page Program.
 
-Lecture des données
+## Lecture des données
 
 Lecture en mode Indirect
 
