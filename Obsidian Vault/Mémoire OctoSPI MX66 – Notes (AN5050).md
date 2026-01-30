@@ -132,8 +132,8 @@ Ces mécanismes améliorent la fiabilité et la sécurité du système.
 
 Pour une utilisation fiable, la mémoire est généralement organisée en zones :
 
-paramètres de configuration
-données applicatives
-stockage temporaire ou logs
+paramètres de configuration,
+données applicatives,
+stockage temporaire ou logs.
 
 Cette organisation permet de limiter l’usure de la flash et de structurer les accès mémoire.
