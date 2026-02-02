@@ -7,3 +7,5 @@ sauvegarder et générer le code tester la liaison série
 Problème de liaison uart rien ne s'affiche 
 sur 2 cartes / 1 carte à un problème.
 stack size à revérifier plus tard
+
+Problème résolu  affichage sur le terminal avec uart1 et mise en place de 2 tâches pour allumer les leds avec un rapport cyclique 
